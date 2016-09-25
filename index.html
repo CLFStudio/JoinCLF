@@ -1,0 +1,49 @@
+<!doctype html>
+<html data-framework="vue">
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CLF 招新计划</title>
+		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
+		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
+		<style> [v-cloak] { display: none; } </style>
+	</head>
+	<body>
+		<section class="todoapp">
+			<header class="header">
+				<h1>Path</h1>
+			</header>
+			<section class="main" v-show="todos.length" v-cloak>
+				<ul class="todo-list">
+					<li class="todo" v-for="todo in filteredTodos" :class="{completed: todo.completed, editing: todo == editedTodo}">
+						<div class="view">
+							<input class="toggle" type="checkbox" v-model="todo.completed">
+							<label><a :href="todo.url">{{todo.title}}</a></label>
+						</div>
+						<input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)">
+					</li>
+				</ul>
+			</section>
+			<footer class="footer" v-show="todos.length" v-cloak>
+				<span class="todo-count">
+					<strong v-text="remaining"></strong> {{remaining | pluralize 'item'}} left
+				</span>
+				<ul class="filters">
+					<li><a href="#/all" :class="{selected: visibility == 'all'}">全部</a></li>
+					<li><a href="#/active" :class="{selected: visibility == 'active'}">进行中</a></li>
+					<li><a href="#/completed" :class="{selected: visibility == 'completed'}">已完成</a></li>
+				</ul>
+			</footer>
+		</section>
+		<footer class="info">
+			<p>Written by <a href="http://www.kffuck.com">MKFMIKU</a></p>
+			<p>Part of <a href="http://www.conglinfeng.com">CLF Studio</a></p>
+		</footer>
+		<script src="node_modules/todomvc-common/base.js"></script>
+		<script src="node_modules/director/build/director.js"></script>
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<script src="js/store.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/routes.js"></script>
+	</body>
+</html>
